@@ -1,0 +1,42 @@
+name: Request CSV deduplication
+description: Order the fixed-scope $3 CSV deduplication script
+title: "[CSV dedup] "
+labels: ["service-request"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Use only public or synthetic, non-sensitive data. Do not paste credentials or personal data.
+  - type: input
+    id: schema
+    attributes:
+      label: CSV columns
+      description: List the header names or link to a public synthetic sample.
+    validations:
+      required: true
+  - type: input
+    id: keys
+    attributes:
+      label: Deduplication key columns
+      description: Which columns jointly identify duplicates?
+    validations:
+      required: true
+  - type: dropdown
+    id: retention
+    attributes:
+      label: Row retention
+      options:
+        - Keep first row
+        - Keep last row
+    validations:
+      required: true
+  - type: checkboxes
+    id: terms
+    attributes:
+      label: Scope confirmation
+      options:
+        - label: I will provide no secrets, credentials, or personal data.
+          required: true
+        - label: I understand the fixed price is 3 USDC on Base after review.
+          required: true
+

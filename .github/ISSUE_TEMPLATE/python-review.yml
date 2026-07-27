@@ -1,0 +1,31 @@
+name: Request focused Python review
+description: Order the fixed-scope $4 public-source review
+title: "[Python review] "
+labels: ["service-request"]
+body:
+  - type: input
+    id: source
+    attributes:
+      label: Public source URL
+      description: Link one public file or patch of no more than 400 changed lines.
+    validations:
+      required: true
+  - type: checkboxes
+    id: focus
+    attributes:
+      label: Review focus
+      options:
+        - label: Correctness and edge cases
+        - label: Error handling
+        - label: API or async behavior
+        - label: Maintainability
+  - type: checkboxes
+    id: terms
+    attributes:
+      label: Scope confirmation
+      options:
+        - label: The source is public and the request needs no credentials or production access.
+          required: true
+        - label: I understand the fixed price is 4 USDC on Base after review.
+          required: true
+
