@@ -38,6 +38,20 @@ SLA: 24 hours after the public source URL and review focus are confirmed.
 
 [Request a focused review](../../issues/new?template=python-review.yml)
 
+## $1 — one-endpoint API smoke check
+
+Deliverable:
+
+- one public HTTP endpoint checked for expected status, response size, content
+  type, and latency
+- machine-readable JSON result
+- concise failure diagnosis when the endpoint is unreachable or unexpected
+
+Buyer-verifiable proof:
+[`examples/api_smoke.py`](examples/api_smoke.py), with local HTTP-server tests.
+This does not include authentication, production mutation, load testing, or
+private endpoints.
+
 ## Settlement
 
 The buyer reviews the delivered public artifact first. Payment is then made in
