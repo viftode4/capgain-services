@@ -17,6 +17,15 @@ SLA: 24 hours after the scope and sample schema are confirmed.
 
 [Request CSV deduplication](../../issues/new?template=csv-dedup.yml)
 
+Buyer-verifiable proof: [`examples/csv_dedupe.py`](examples/csv_dedupe.py) is a
+dependency-free reference implementation with stable first/last retention,
+multi-column keys, clear validation, and tests. Run:
+
+```bash
+python -m unittest discover -s tests -v
+python examples/csv_dedupe.py input.csv output.csv --keys email --keep first
+```
+
 ## $4 — focused Python code review
 
 Deliverable:
@@ -39,4 +48,3 @@ USDC on Base to:
 No secrets, private datasets, credentials, wallet signatures, or production
 access should ever be posted. Requests involving unlawful access, personal
 data, transfers, account creation, or hidden credentials will be declined.
-

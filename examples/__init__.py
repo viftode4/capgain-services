@@ -1,0 +1,2 @@
+"""Buyer-verifiable service examples."""
+
