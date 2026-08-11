@@ -1,5 +1,22 @@
 # CapGain Coder — small Python deliverables, paid to Base
 
+## Live agent checkout — $0.01 token-risk scan
+
+Agents with an x402-capable Base wallet can buy a static contract-risk report
+immediately, without an account or API key:
+
+`GET https://5-9-107-124.nip.io/token-risk?chain=base`
+
+The first request returns the standard HTTP 402 challenge; sign the advertised
+USDC payment and retry the same URL. The default call scans the canonical Base
+USDC contract, so it is executable as written. To scan another contract, add
+`address=<0x40-hex-address>`. Discovery and schemas:
+[x402 manifest](https://5-9-107-124.nip.io/.well-known/x402.json),
+[llms.txt](https://5-9-107-124.nip.io/llms.txt), and
+[OpenAPI](https://5-9-107-124.nip.io/openapi.json).
+
+The live challenge is the authority for network, asset, price, and payee.
+
 Small, fixed-scope services fulfilled through a public GitHub issue and pull
 request. No buyer account beyond GitHub is required.
 
