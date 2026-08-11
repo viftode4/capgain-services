@@ -69,6 +69,8 @@ Buyer-verifiable proof:
 This does not include authentication, production mutation, load testing, or
 private endpoints.
 
+[Request an API smoke check](../../issues/new?template=api-smoke.yml)
+
 ## Settlement
 
 The buyer reviews the delivered public artifact first. Payment is then made in
