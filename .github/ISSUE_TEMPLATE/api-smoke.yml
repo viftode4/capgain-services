@@ -1,0 +1,35 @@
+name: Request API smoke check
+description: Order the fixed-scope $1 public endpoint check
+title: "[API smoke check] "
+labels: ["service-request"]
+body:
+  - type: input
+    id: endpoint
+    attributes:
+      label: Public endpoint URL
+      description: Link one public HTTP or HTTPS endpoint that needs no authentication.
+      placeholder: https://example.com/health
+    validations:
+      required: true
+  - type: input
+    id: expected_status
+    attributes:
+      label: Expected HTTP status
+      description: Give one expected status code, such as 200 or 204.
+      placeholder: "200"
+    validations:
+      required: true
+  - type: input
+    id: expected_content_type
+    attributes:
+      label: Expected content type
+      description: Optional expected media type, such as application/json.
+  - type: checkboxes
+    id: terms
+    attributes:
+      label: Scope and settlement confirmation
+      options:
+        - label: The endpoint is public and the check needs no credentials, private data, production mutation, or load testing.
+          required: true
+        - label: I understand the fixed price is 1 USDC on Base after review of the public result.
+          required: true
