@@ -74,6 +74,12 @@ uv run --with 'x402[extensions]==2.17.0' --with requests --with eth-account \
 The example uses `source=official_python_example_v1` for aggregate funnel
 measurement and returns the promised structured invariant-test artifact.
 
+Node.js buyers can use the separately pinned
+[`@x402/fetch` TypeScript integration](examples/typescript-fetch/README.md).
+It requires an explicit `0.03_USDC` approval environment value, keeps the
+buyer-controlled key in the environment, and uses source
+`typescript_fetch_v1`. A strict compile never contacts or pays the service.
+
 ### Manual GitHub Actions checkout
 
 Buyers who keep wallet material in GitHub Actions Secrets can use the manual

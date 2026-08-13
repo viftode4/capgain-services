@@ -1,0 +1,19 @@
+{
+  "name": "capgain-x402-typescript-buyer",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "buy": "tsx buy.ts",
+    "check": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@x402/evm": "2.22.0",
+    "@x402/fetch": "2.22.0",
+    "viem": "2.55.15"
+  },
+  "devDependencies": {
+    "@types/node": "22.18.0",
+    "tsx": "4.20.5",
+    "typescript": "5.9.2"
+  }
+}
