@@ -43,7 +43,7 @@ USDC challenge; payment and retry yield the artifact.
 
 ### 0.03 USDC — invariant/fuzz test and failing trace
 
-`GET https://viftode4-token-risk-402.loca.lt/artifact/invariant-test?language=python&subject=Ledger&invariant=total%20assets%20equal%20liabilities%20plus%20equity`
+`GET https://viftode4-token-risk-402.loca.lt/artifact/invariant-test?language=python&subject=Ledger&invariant=total%20assets%20equal%20liabilities%20plus%20equity&source=capgain_services_a2a`
 
 Returns a runnable Hypothesis, Foundry, or fast-check harness; exact run
 command; shrink policy; and a minimized failing-trace schema. It reuses the
@@ -52,7 +52,7 @@ fuzzing, path-tracking, and counterexample work in
 
 ### 0.05 USDC — repository security/accounting review
 
-`GET https://viftode4-token-risk-402.loca.lt/artifact/repository-review?repo=viftode4%2Fintent-proof&ref=HEAD`
+`GET https://viftode4-token-risk-402.loca.lt/artifact/repository-review?repo=viftode4%2Fintent-proof&ref=HEAD&source=capgain_services_a2a`
 
 Returns the resolved commit, scanned blob hashes, permalinked evidence,
 prioritized security/accounting findings, explicit accounting invariants, and
@@ -61,7 +61,7 @@ executes buyer code.
 
 ### 0.03 USDC — evidence-backed protocol research
 
-`GET https://viftode4-token-risk-402.loca.lt/artifact/protocol-research?protocol=aave`
+`GET https://viftode4-token-risk-402.loca.lt/artifact/protocol-research?protocol=aave&source=capgain_services_a2a`
 
 Returns timestamped protocol metadata, per-chain TVL evidence, declared audit
 and source links, decision questions, and a reproducible next experiment. Its
