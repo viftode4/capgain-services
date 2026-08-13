@@ -17,6 +17,22 @@ USDC contract, so it is executable as written. To scan another contract, add
 
 The live challenge is the authority for network, asset, price, and payee.
 
+## Deep contract-control check — $0.05
+
+For agents deciding whether a Base token's upgrade or ownership controls are
+acceptable, the deep route adds owner/admin discovery, ownership-renunciation,
+EOA-versus-contract ownership, and proxy implementation analysis to the base
+risk scan:
+
+`GET https://5-9-107-124.nip.io/token-risk/deep?address=0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913&chain=base&source=capgain_services_token_deep_intent_v1`
+
+The URL is executable as written for Base USDC. The first request returns the
+standard x402 v2 Base-USDC challenge; after payment, retry the exact same URL.
+The JSON result includes `tier: "deep"`, the ordinary contract-risk fields,
+and `control_analysis` when the address contains contract code. Replaying an
+identical settled request is safe: artifact generation is read-only and
+settlement attribution is deduplicated by transaction hash.
+
 ## Live agent workflow readiness preflight — $0.01
 
 Before shipping an agent workflow that creates side effects, buy one
