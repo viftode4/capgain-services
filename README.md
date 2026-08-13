@@ -5,15 +5,15 @@
 Agents with an x402-capable Base wallet can buy a static contract-risk report
 immediately, without an account or API key:
 
-`GET https://5-9-107-124.nip.io/token-risk?chain=base`
+`GET https://viftode4-token-risk-402.loca.lt/token-risk?chain=base`
 
 The first request returns the standard HTTP 402 challenge; sign the advertised
 USDC payment and retry the same URL. The default call scans the canonical Base
 USDC contract, so it is executable as written. To scan another contract, add
 `address=<0x40-hex-address>`. Discovery and schemas:
-[x402 manifest](https://5-9-107-124.nip.io/.well-known/x402.json),
-[llms.txt](https://5-9-107-124.nip.io/llms.txt), and
-[OpenAPI](https://5-9-107-124.nip.io/openapi.json).
+[x402 manifest](https://viftode4-token-risk-402.loca.lt/.well-known/x402.json),
+[llms.txt](https://viftode4-token-risk-402.loca.lt/llms.txt), and
+[OpenAPI](https://viftode4-token-risk-402.loca.lt/openapi.json).
 
 The live challenge is the authority for network, asset, price, and payee.
 
@@ -22,7 +22,7 @@ The live challenge is the authority for network, asset, price, and payee.
 Before shipping an agent workflow that creates side effects, buy one
 machine-readable ship/hold assessment of its durability gates:
 
-`GET https://5-9-107-124.nip.io/workflow-readiness?idempotency=true&durable_state=true&bounded_retries=true&compensation=true&receipt_verification=true&timeout_seconds=60`
+`GET https://viftode4-token-risk-402.loca.lt/workflow-readiness?idempotency=true&durable_state=true&bounded_retries=true&compensation=true&receipt_verification=true&timeout_seconds=60`
 
 The result contains a 0–100 readiness score, passed and missing gates, exact
 remediation, and four failure-injection tests. It reuses proven Saga/2PC crash-
@@ -30,9 +30,44 @@ recovery and verifiable-receipt patterns from owned implementations. Inputs are
 only booleans plus a bounded step timeout; no buyer code, secrets, or production
 access are accepted. Price is **0.01 USDC on Base** through the same x402 rail.
 
-Discovery: [x402 manifest](https://5-9-107-124.nip.io/.well-known/x402.json),
-[agent card](https://5-9-107-124.nip.io/.well-known/agent.json), and
-[OpenAPI](https://5-9-107-124.nip.io/openapi.json).
+Discovery: [x402 manifest](https://viftode4-token-risk-402.loca.lt/.well-known/x402.json),
+[agent card](https://viftode4-token-risk-402.loca.lt/.well-known/agent.json), and
+[OpenAPI](https://viftode4-token-risk-402.loca.lt/openapi.json).
+
+## Machine-buyable specialized artifacts
+
+Each endpoint returns detailed JSON—not generic chat—and publishes its exact
+input/output schema and example through the live x402 manifest, OpenAPI, agent
+card, and Coinbase Bazaar extension. The first request returns an HTTP 402 Base
+USDC challenge; payment and retry yield the artifact.
+
+### 0.03 USDC — invariant/fuzz test and failing trace
+
+`GET https://viftode4-token-risk-402.loca.lt/artifact/invariant-test?language=python&subject=Ledger&invariant=total%20assets%20equal%20liabilities%20plus%20equity`
+
+Returns a runnable Hypothesis, Foundry, or fast-check harness; exact run
+command; shrink policy; and a minimized failing-trace schema. It reuses the
+fuzzing, path-tracking, and counterexample work in
+[`automated-software-testing`](https://github.com/viftode4/automated-software-testing).
+
+### 0.05 USDC — repository security/accounting review
+
+`GET https://viftode4-token-risk-402.loca.lt/artifact/repository-review?repo=viftode4%2Fintent-proof&ref=HEAD`
+
+Returns the resolved commit, scanned blob hashes, permalinked evidence,
+prioritized security/accounting findings, explicit accounting invariants, and
+a reproducible regression test. Review is bounded to public source and never
+executes buyer code.
+
+### 0.03 USDC — evidence-backed protocol research
+
+`GET https://viftode4-token-risk-402.loca.lt/artifact/protocol-research?protocol=aave`
+
+Returns timestamped protocol metadata, per-chain TVL evidence, declared audit
+and source links, decision questions, and a reproducible next experiment. Its
+structure reuses the evidence-channel and research-loop patterns in
+[`deep-research-agent`](https://github.com/viftode4/deep-research-agent) and
+[`research-copilot`](https://github.com/viftode4/research-copilot).
 
 Small, fixed-scope services fulfilled through a public GitHub issue and pull
 request. No buyer account beyond GitHub is required.
