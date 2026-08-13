@@ -41,6 +41,13 @@ input/output schema and example through the live x402 manifest, OpenAPI, agent
 card, and Coinbase Bazaar extension. The first request returns an HTTP 402 Base
 USDC challenge; payment and retry yield the artifact.
 
+Start with the free machine-readable preview—no wallet or payment required:
+
+`GET https://viftode4-token-risk-402.loca.lt/artifact/preview`
+
+It returns exact prices, Base USDC payment metadata, input examples, output
+field previews, and source-tagged executable purchase URLs for every offer.
+
 ### 0.03 USDC — invariant/fuzz test and failing trace
 
 `GET https://viftode4-token-risk-402.loca.lt/artifact/invariant-test?language=python&subject=Ledger&invariant=total%20assets%20equal%20liabilities%20plus%20equity&source=capgain_services_a2a`
