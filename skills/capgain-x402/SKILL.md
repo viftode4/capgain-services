@@ -12,7 +12,7 @@ a small Base-USDC purchase.
 ## Safe workflow
 
 1. Read the free preview at
-   `https://viftode4-token-risk-402.loca.lt/artifact/preview?source=agent_skill_v1`.
+   `https://5-9-107-124.nip.io/artifact/preview?source=agent_skill_v1`.
 2. Show the user the selected artifact, exact price, public inputs, and expected
    output. Obtain explicit approval before any paid request.
 3. Require a buyer-controlled Base wallet and local spending policy. Never ask

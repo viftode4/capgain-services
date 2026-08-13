@@ -3,7 +3,7 @@ import { wrapFetchWithPayment, x402Client } from "@x402/fetch";
 import { privateKeyToAccount } from "viem/accounts";
 
 const url = new URL(
-  "https://viftode4-token-risk-402.loca.lt/artifact/invariant-test",
+  "https://5-9-107-124.nip.io/artifact/invariant-test",
 );
 url.searchParams.set("language", "typescript");
 url.searchParams.set("subject", "Ledger");

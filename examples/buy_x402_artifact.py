@@ -20,7 +20,7 @@ if not re.fullmatch(r"[a-z0-9_-]{1,48}", SOURCE):
     raise SystemExit("CAPGAIN_SOURCE must be a safe aggregate attribution slug")
 
 URL = (
-    "https://viftode4-token-risk-402.loca.lt/artifact/invariant-test"
+    "https://5-9-107-124.nip.io/artifact/invariant-test"
     "?language=python&subject=Ledger"
     "&invariant=assets%20equal%20liabilities%20plus%20equity"
     f"&source={SOURCE}"
