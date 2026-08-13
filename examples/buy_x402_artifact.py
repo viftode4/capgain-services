@@ -7,10 +7,11 @@ This example never creates, stores, prints, or transmits that key directly.
 
 import os
 
-import httpx
+import requests
 from eth_account import Account
-from x402.clients.httpx import x402HttpxClient
-from x402.mechanisms.evm.exact import ExactEvmScheme
+from x402 import x402ClientSync
+from x402.http.clients.requests import wrapRequestsWithPayment
+from x402.mechanisms.evm.exact.client import ExactEvmScheme
 
 
 URL = (
@@ -26,12 +27,14 @@ def main() -> None:
     if not private_key:
         raise SystemExit("Set BUYER_PRIVATE_KEY to a buyer-controlled Base wallet key")
 
-    account = Account.from_key(private_key)
-    client = x402HttpxClient(account=account, schemes=[ExactEvmScheme()])
-    with httpx.Client(transport=client, timeout=30.0) as session:
-        response = session.get(URL)
-        response.raise_for_status()
-        print(response.json())
+    payment_client = x402ClientSync()
+    payment_client.register(
+        "eip155:8453", ExactEvmScheme(Account.from_key(private_key))
+    )
+    session = wrapRequestsWithPayment(requests.Session(), payment_client)
+    response = session.get(URL, timeout=30.0)
+    response.raise_for_status()
+    print(response.json())
 
 
 if __name__ == "__main__":

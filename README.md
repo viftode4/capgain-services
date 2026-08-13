@@ -62,7 +62,7 @@ receives or stores the key. Review the live challenge and the 0.03-USDC price,
 then run only if the purchase is intended:
 
 ```bash
-uv run --with 'x402[httpx,evm]==2.17.0' --with eth-account \
+uv run --with 'x402[extensions]==2.17.0' --with requests --with eth-account \
   examples/buy_x402_artifact.py
 ```
 
