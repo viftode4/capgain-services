@@ -53,6 +53,22 @@ The request form links uniquely attributed checkout URLs, so an agent can pay
 without opening an issue or record its exact SKU, public input, and decision
 question before checkout.
 
+### Official Python buyer integration
+
+The opt-in [official-client example](examples/buy_x402_artifact.py) performs
+challenge → buyer policy/signature → same-URL retry with x402 v2. The buyer
+controls its own Base wallet and spending policy; this repository never
+receives or stores the key. Review the live challenge and the 0.03-USDC price,
+then run only if the purchase is intended:
+
+```bash
+uv run --with 'x402[httpx,evm]==2.17.0' --with eth-account \
+  examples/buy_x402_artifact.py
+```
+
+The example uses `source=official_python_example_v1` for aggregate funnel
+measurement and returns the promised structured invariant-test artifact.
+
 ### 0.03 USDC — invariant/fuzz test and failing trace
 
 `GET https://viftode4-token-risk-402.loca.lt/artifact/invariant-test?language=python&subject=Ledger&invariant=total%20assets%20equal%20liabilities%20plus%20equity&source=capgain_services_a2a`
