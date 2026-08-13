@@ -74,6 +74,16 @@ uv run --with 'x402[extensions]==2.17.0' --with requests --with eth-account \
 The example uses `source=official_python_example_v1` for aggregate funnel
 measurement and returns the promised structured invariant-test artifact.
 
+### Manual GitHub Actions checkout
+
+Buyers who keep wallet material in GitHub Actions Secrets can use the manual
+[`Buy x402 invariant artifact`](.github/workflows/buy-x402-artifact.yml)
+workflow. Add `X402_BUYER_PRIVATE_KEY` as a repository secret, review the live
+challenge, and type the exact 0.03-USDC approval phrase when dispatching. The
+workflow has read-only repository permissions, a five-minute timeout, attributes
+the checkout as `github_actions_dispatch_v1`, and uploads the returned JSON for
+seven days. It never prints the key or runs automatically on a push or PR.
+
 ### 0.03 USDC — invariant/fuzz test and failing trace
 
 `GET https://viftode4-token-risk-402.loca.lt/artifact/invariant-test?language=python&subject=Ledger&invariant=total%20assets%20equal%20liabilities%20plus%20equity&source=capgain_services_a2a`

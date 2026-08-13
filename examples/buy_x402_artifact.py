@@ -6,6 +6,7 @@ This example never creates, stores, prints, or transmits that key directly.
 """
 
 import os
+import re
 
 import requests
 from eth_account import Account
@@ -14,11 +15,15 @@ from x402.http.clients.requests import wrapRequestsWithPayment
 from x402.mechanisms.evm.exact.client import ExactEvmScheme
 
 
+SOURCE = os.environ.get("CAPGAIN_SOURCE", "official_python_example_v1")
+if not re.fullmatch(r"[a-z0-9_-]{1,48}", SOURCE):
+    raise SystemExit("CAPGAIN_SOURCE must be a safe aggregate attribution slug")
+
 URL = (
     "https://viftode4-token-risk-402.loca.lt/artifact/invariant-test"
     "?language=python&subject=Ledger"
     "&invariant=assets%20equal%20liabilities%20plus%20equity"
-    "&source=official_python_example_v1"
+    f"&source={SOURCE}"
 )
 
 

@@ -1,0 +1,37 @@
+name: Buy x402 invariant artifact
+
+on:
+  workflow_dispatch:
+    inputs:
+      approval:
+        description: 'Type I APPROVE 0.03 USDC after reviewing the live challenge'
+        required: true
+        type: string
+
+permissions:
+  contents: read
+
+jobs:
+  buy:
+    if: ${{ inputs.approval == 'I APPROVE 0.03 USDC' }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v6
+      - name: Purchase from the exact pinned route
+        env:
+          BUYER_PRIVATE_KEY: ${{ secrets.X402_BUYER_PRIVATE_KEY }}
+          CAPGAIN_SOURCE: github_actions_dispatch_v1
+        run: |
+          test -n "$BUYER_PRIVATE_KEY"
+          uv run --with 'x402[extensions]==2.17.0' --with requests --with eth-account \
+            examples/buy_x402_artifact.py > invariant-artifact.json
+          python -m json.tool invariant-artifact.json >/dev/null
+      - uses: actions/upload-artifact@v4
+        with:
+          name: purchased-invariant-artifact
+          path: invariant-artifact.json
+          if-no-files-found: error
+          retention-days: 7
+
