@@ -17,6 +17,23 @@ USDC contract, so it is executable as written. To scan another contract, add
 
 The live challenge is the authority for network, asset, price, and payee.
 
+## Live agent workflow readiness preflight — $0.01
+
+Before shipping an agent workflow that creates side effects, buy one
+machine-readable ship/hold assessment of its durability gates:
+
+`GET https://5-9-107-124.nip.io/workflow-readiness?idempotency=true&durable_state=true&bounded_retries=true&compensation=true&receipt_verification=true&timeout_seconds=60`
+
+The result contains a 0–100 readiness score, passed and missing gates, exact
+remediation, and four failure-injection tests. It reuses proven Saga/2PC crash-
+recovery and verifiable-receipt patterns from owned implementations. Inputs are
+only booleans plus a bounded step timeout; no buyer code, secrets, or production
+access are accepted. Price is **0.01 USDC on Base** through the same x402 rail.
+
+Discovery: [x402 manifest](https://5-9-107-124.nip.io/.well-known/x402.json),
+[agent card](https://5-9-107-124.nip.io/.well-known/agent.json), and
+[OpenAPI](https://5-9-107-124.nip.io/openapi.json).
+
 Small, fixed-scope services fulfilled through a public GitHub issue and pull
 request. No buyer account beyond GitHub is required.
 
