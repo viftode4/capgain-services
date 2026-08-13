@@ -41,6 +41,11 @@ input/output schema and example through the live x402 manifest, OpenAPI, agent
 card, and Coinbase Bazaar extension. The first request returns an HTTP 402 Base
 USDC challenge; payment and retry yield the artifact.
 
+Agent runtimes can also install or vendor the preview-first
+[`capgain-x402` skill](skills/capgain-x402/SKILL.md). It requires explicit
+purchase approval, checks the live Base-USDC terms, and attributes opt-in use as
+`source=agent_skill_v1`; it never asks for a wallet key in chat or logs.
+
 Start with the free machine-readable preview—no wallet or payment required:
 
 `GET https://viftode4-token-risk-402.loca.lt/artifact/preview`
