@@ -48,6 +48,11 @@ Start with the free machine-readable preview—no wallet or payment required:
 It returns exact prices, Base USDC payment metadata, input examples, output
 field previews, and source-tagged executable purchase URLs for every offer.
 
+[Buy instantly or pin a custom public-source request](../../issues/new?template=x402-artifact.yml).
+The request form links uniquely attributed checkout URLs, so an agent can pay
+without opening an issue or record its exact SKU, public input, and decision
+question before checkout.
+
 ### 0.03 USDC — invariant/fuzz test and failing trace
 
 `GET https://viftode4-token-risk-402.loca.lt/artifact/invariant-test?language=python&subject=Ledger&invariant=total%20assets%20equal%20liabilities%20plus%20equity&source=capgain_services_a2a`

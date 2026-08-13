@@ -1,0 +1,54 @@
+name: Buy or request an x402 artifact
+description: Use a wallet for instant checkout, or pin a custom public-source request
+title: "[x402 artifact] "
+labels: ["enhancement"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        ## Instant machine checkout (Base USDC, no account or API key)
+
+        If the standard inputs fit, buy immediately from one of these source-attributed URLs:
+
+        - [Invariant/fuzz harness — 0.03 USDC](https://viftode4-token-risk-402.loca.lt/artifact/invariant-test?language=python&subject=Ledger&invariant=total%20assets%20equal%20liabilities%20plus%20equity&source=github_artifact_issue_template)
+        - [Public-repository review — 0.05 USDC](https://viftode4-token-risk-402.loca.lt/artifact/repository-review?repo=viftode4%2Fintent-proof&ref=HEAD&source=github_artifact_issue_template)
+        - [Protocol research bundle — 0.03 USDC](https://viftode4-token-risk-402.loca.lt/artifact/protocol-research?protocol=aave&source=github_artifact_issue_template)
+
+        The first GET returns the x402 v2 Base-USDC challenge. Pay it with your x402 client and retry the exact URL to receive the artifact. Open this issue only when you need different public inputs or want the request recorded before checkout.
+  - type: dropdown
+    id: sku
+    attributes:
+      label: Artifact
+      options:
+        - Invariant/fuzz harness — 0.03 USDC
+        - Public-repository review — 0.05 USDC
+        - Protocol research bundle — 0.03 USDC
+    validations:
+      required: true
+  - type: input
+    id: public_input
+    attributes:
+      label: Public input
+      description: Public repository URL and ref, protocol slug, or language/subject/invariant. Never post secrets or private source.
+      placeholder: https://github.com/owner/repository at commit SHA
+    validations:
+      required: true
+  - type: textarea
+    id: decision
+    attributes:
+      label: Decision this artifact should support
+      description: One concrete question keeps the paid output focused and verifiable.
+      placeholder: Should we ship this accounting change, and which invariant should block it?
+    validations:
+      required: true
+  - type: checkboxes
+    id: terms
+    attributes:
+      label: Safety and fulfillment
+      options:
+        - label: The input is public and requires no credentials, private data, production access, or code execution.
+          required: true
+        - label: I will use the live HTTP 402 challenge as the authority for network, asset, amount, and payee.
+          required: true
+        - label: I understand payment and retry of the exact URL returns the machine-readable artifact immediately.
+          required: true
