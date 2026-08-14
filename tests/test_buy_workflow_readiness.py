@@ -2,10 +2,22 @@ import os
 from pathlib import Path
 import subprocess
 import sys
+from base64 import urlsafe_b64encode
+import importlib.util
+import json
+
+import pytest
 
 
 ROOT = Path(__file__).resolve().parents[1]
 SCRIPT = ROOT / "examples" / "buy_workflow_readiness.py"
+
+
+def load_example():
+    spec = importlib.util.spec_from_file_location("buy_workflow_readiness", SCRIPT)
+    module = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(module)
+    return module
 
 
 def run_example(**environment: str) -> subprocess.CompletedProcess[str]:
@@ -45,3 +57,46 @@ def test_script_pins_exact_route_terms():
     assert "receipt_verification=true" in source
     assert '"eip155:8453"' in source
     assert '"0.01_USDC"' in source
+
+
+def encoded_challenge(module, **term_overrides):
+    terms = dict(module.EXPECTED_TERMS)
+    terms.update(term_overrides)
+    challenge = {
+        "x402Version": 2,
+        "resource": {"url": module.URL},
+        "accepts": [terms],
+    }
+    return urlsafe_b64encode(json.dumps(challenge).encode()).decode().rstrip("=")
+
+
+def test_accepts_only_exact_approved_route_terms():
+    module = load_example()
+    challenge = module.decode_payment_required(encoded_challenge(module))
+    module.validate_terms(challenge)
+
+
+@pytest.mark.parametrize(
+    ("field", "bad_value"),
+    [
+        ("amount", "10001"),
+        ("network", "eip155:1"),
+        ("asset", "0x0000000000000000000000000000000000000000"),
+        ("payTo", "0x0000000000000000000000000000000000000000"),
+    ],
+)
+def test_rejects_mismatched_payment_terms(field, bad_value):
+    module = load_example()
+    challenge = module.decode_payment_required(
+        encoded_challenge(module, **{field: bad_value})
+    )
+    with pytest.raises(SystemExit, match="unexpected payment terms"):
+        module.validate_terms(challenge)
+
+
+def test_rejects_different_resource_url():
+    module = load_example()
+    challenge = module.decode_payment_required(encoded_challenge(module))
+    challenge["resource"]["url"] = "https://example.invalid/other"
+    with pytest.raises(SystemExit, match="different resource URL"):
+        module.validate_terms(challenge)
