@@ -42,8 +42,14 @@ def validate_terms(challenge: dict) -> None:
     if challenge.get("resource", {}).get("url") != URL:
         raise SystemExit("Refusing challenge for a different resource URL")
 
+    options = challenge.get("accepts")
+    if not isinstance(options, list) or len(options) != 1:
+        raise SystemExit("Refusing x402 challenge with multiple payment options")
+
     matching = []
-    for option in challenge.get("accepts", []):
+    for option in options:
+        if not isinstance(option, dict):
+            raise SystemExit("Refusing malformed x402 payment option")
         normalized = dict(option)
         normalized["asset"] = str(normalized.get("asset", "")).lower()
         normalized["payTo"] = str(normalized.get("payTo", "")).lower()

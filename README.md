@@ -55,7 +55,8 @@ For a buyer-controlled Base wallet, the opt-in
 performs the standard challenge, local signature, and same-URL retry. It
 refuses to load payment dependencies unless the exact 0.01-USDC approval is
 present, and it verifies the live challenge is x402 v2 exact Base USDC for
-10,000 raw units to the advertised CapGain payee before signing:
+10,000 raw units to the advertised CapGain payee before signing. Challenges
+with any additional payment alternative fail closed:
 
 ```bash
 APPROVE_CAPGAIN_PURCHASE=0.01_USDC \

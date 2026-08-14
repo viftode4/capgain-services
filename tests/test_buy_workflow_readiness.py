@@ -100,3 +100,16 @@ def test_rejects_different_resource_url():
     challenge["resource"]["url"] = "https://example.invalid/other"
     with pytest.raises(SystemExit, match="different resource URL"):
         module.validate_terms(challenge)
+
+
+@pytest.mark.parametrize("exact_first", [True, False])
+def test_rejects_exact_option_mixed_with_an_extra_option(exact_first):
+    module = load_example()
+    challenge = module.decode_payment_required(encoded_challenge(module))
+    extra = dict(module.EXPECTED_TERMS)
+    extra["amount"] = "999999"
+    extra["payTo"] = "0x0000000000000000000000000000000000000001"
+    exact = challenge["accepts"][0]
+    challenge["accepts"] = [exact, extra] if exact_first else [extra, exact]
+    with pytest.raises(SystemExit, match="multiple payment options"):
+        module.validate_terms(challenge)
