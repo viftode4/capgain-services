@@ -50,6 +50,22 @@ Discovery: [x402 manifest](https://5-9-107-124.nip.io/.well-known/x402.json),
 [agent card](https://5-9-107-124.nip.io/.well-known/agent.json), and
 [OpenAPI](https://5-9-107-124.nip.io/openapi.json).
 
+For a buyer-controlled Base wallet, the opt-in
+[`buy_workflow_readiness.py`](examples/buy_workflow_readiness.py) adapter
+performs the standard challenge, local signature, and same-URL retry. It
+refuses to load payment dependencies unless the exact 0.01-USDC approval is
+present:
+
+```bash
+APPROVE_CAPGAIN_PURCHASE=0.01_USDC \
+CAPGAIN_SOURCE=workflow_readiness_python_v1 \
+uv run --with 'x402[extensions]==2.17.0' --with requests --with eth-account \
+  examples/buy_workflow_readiness.py
+```
+
+Set `BUYER_PRIVATE_KEY` only in the buyer's local secret environment or CI
+secret store; never paste it into an issue, command argument, or log.
+
 ## Machine-buyable specialized artifacts
 
 Each endpoint returns detailed JSON—not generic chat—and publishes its exact
